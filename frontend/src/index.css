@@ -1,0 +1,211 @@
+/* ===========================================
+   DESIGN SYSTEM - CSS Variables
+   =========================================== */
+
+/* Dark Mode (Default) */
+:root {
+  --bg-deep: #0a0e17;
+  --bg-card: #111827;
+  --bg-input: #1a2332;
+  --accent-blue: #38bdf8;
+  --accent-cyan: #22d3ee;
+  --accent-glow: rgba(56, 189, 248, 0.15);
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border-subtle: #1e293b;
+  --risk-high: #ef4444;
+  --risk-medium: #f59e0b;
+  --risk-low: #22c55e;
+  --grid-color: rgba(56, 189, 248, 0.03);
+  --bg-gradient-end: #0f1729;
+}
+
+/* Light Mode */
+[data-theme="light"] {
+  --bg-deep: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-input: #f1f5f9;
+  --accent-blue: #0284c7;
+  --accent-cyan: #0891b2;
+  --accent-glow: rgba(2, 132, 199, 0.1);
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --border-subtle: #e2e8f0;
+  --risk-high: #dc2626;
+  --risk-medium: #d97706;
+  --risk-low: #16a34a;
+  --grid-color: rgba(2, 132, 199, 0.05);
+  --bg-gradient-end: #e0f2fe;
+}
+
+/* ===========================================
+   GLOBAL RESET & BASE STYLES
+   =========================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, var(--accent-glow) 0%, transparent 50%),
+    linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-gradient-end) 100%);
+  background-attachment: fixed;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Subtle grid overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===========================================
+   LAYOUT
+   =========================================== */
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===========================================
+   CARD COMPONENT
+   =========================================== */
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+/* ===========================================
+   FORM ELEMENTS
+   =========================================== */
+
+textarea {
+  width: 100%;
+  height: 200px;
+  padding: 1rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* ===========================================
+   SUBMIT BUTTON
+   =========================================== */
+
+.submit-btn {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 100%);
+  border: none;
+  border-radius: 10px;
+  color: var(--bg-deep);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(56, 189, 248, 0.4);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ===========================================
+   LOADING SPINNER
+   =========================================== */
+
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 0.8s ease-in-out infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===========================================
+   ERROR MESSAGE
+   =========================================== */
+
+.error-message {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid var(--risk-high);
+  border-radius: 10px;
+  padding: 1rem;
+  color: var(--risk-high);
+  text-align: center;
+}
