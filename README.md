@@ -1,6 +1,6 @@
-# JIRA Critique Python Tool
+# Product Idea Critique AI
 
-A full-stack web application for analyzing JIRA tickets and business content using AI-powered critique and scoring.
+A full-stack web application for analyzing JIRA tickets, business ideas, and product concepts using AI-powered critique and scoring.
 
 ## 🚀 Features
 
